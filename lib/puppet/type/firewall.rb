@@ -721,6 +721,15 @@ Puppet::Type.newtype(:firewall) do
     PUPPETCODE
   end
 
+  newproperty(:random_fully, required_features: :dnat) do
+    desc <<-PUPPETCODE
+      When using a jump value of "MASQUERADE", "DNAT", "REDIRECT", or "SNAT"
+      this boolean will enable fully randomized port mapping.
+    PUPPETCODE
+
+    newvalues(:true, :false)
+  end
+
   newproperty(:random, required_features: :dnat) do
     desc <<-PUPPETCODE
       When using a jump value of "MASQUERADE", "DNAT", "REDIRECT", or "SNAT"
