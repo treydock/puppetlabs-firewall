@@ -59,6 +59,11 @@ Puppet::Type.type(:firewall).provide :iptables, parent: Puppet::Provider::Firewa
                 '--set-xmark'
               end
 
+  kernelversion = Facter.value('kernelversion')
+  if kernelversion && Puppet::Util::Package.versioncmp(kernelversion, '3.13') >= 0
+    has_feature :random_fully
+  end
+
   @protocol = 'IPv4'
 
   @resource_map = {
